@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // URL de base de l'API
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5173';
 
 // Async thunks pour les opérations d'authentification
 export const loginUser = createAsyncThunk(
-  'auth/login',
+  '/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, credentials);
+      const response = await axios.post(`${API_URL}/connexion`, credentials);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -18,10 +18,10 @@ export const loginUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  'auth/register',
+  '/register',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
+      const response = await axios.post(`${API_URL}/register`, userData);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -30,12 +30,12 @@ export const registerUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  'auth/logout',
+  '/logout',
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        await axios.post(`${API_URL}/auth/logout`, {}, {
+        await axios.post(`${API_URL}/logout`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
@@ -47,13 +47,13 @@ export const logoutUser = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'auth/currentUser',
+  '/currentUser',
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return rejectWithValue('No token found');
       
-      const response = await axios.get(`${API_URL}/auth/me`, {
+      const response = await axios.get(`${API_URL}/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data;

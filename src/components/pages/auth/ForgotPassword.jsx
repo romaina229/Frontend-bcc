@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useForgotPasswordMutation } from '../../services/authApi';
+import { useForgotPasswordMutation } from '../../../services/authApi';
 import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
@@ -48,7 +48,7 @@ const ForgotPassword = () => {
         </form>
         
         <div className="text-center space-y-2">
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/connexion" className="text-blue-600 hover:underline">
             Retour à la connexion
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useResetPasswordMutation } from '../../services/authApi';
+import { useResetPasswordMutation } from '../../../services/authApi';
 import { toast } from 'react-toastify';
 
 const ResetPassword = () => {

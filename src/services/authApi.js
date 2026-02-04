@@ -2,7 +2,7 @@ import { apiSlice } from '../components/store/api/apiSlice';
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // Connexion
+    // Connexion - Compatible avec /connexion et /login
     login: builder.mutation({
       query: (credentials) => ({
         url: '/connexion',
@@ -11,25 +11,23 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     
-    // Inscription
+    // Inscription - Compatible avec /inscription et /register
     register: builder.mutation({
       query: (userData) => ({
         url: '/inscription',
         method: 'POST',
         body: {
-          nom: userData.nom,
-          prenom: userData.prenom,
+          name: userData.name || `${userData.prenom} ${userData.nom}`,
           email: userData.email,
           password: userData.password,
           password_confirmation: userData.password_confirmation,
-          telephone: userData.telephone,
-          date_naissance: userData.date_naissance,
-          genre: userData.genre,
+          phone: userData.telephone || userData.phone,
+          role: userData.role || 'participant',
         },
       }),
     }),
     
-    // Déconnexion
+    // Déconnexion - Compatible avec /deconnexion et /logout
     logout: builder.mutation({
       query: () => ({
         url: '/deconnexion',
@@ -37,7 +35,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     
-    // Récupérer l'utilisateur actuel
+    // Récupérer l'utilisateur actuel - Compatible avec /utilisateur et /me
     getCurrentUser: builder.query({
       query: () => '/utilisateur',
       providesTags: ['User'],
@@ -68,6 +66,7 @@ export const {
   useRegisterMutation,
   useLogoutMutation,
   useGetCurrentUserQuery,
+  useLazyGetCurrentUserQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
 } = authApi;

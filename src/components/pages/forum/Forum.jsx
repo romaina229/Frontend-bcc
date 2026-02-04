@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { motion } from 'framer-motion'
-import {
+//import { motion } from 'framer-motion'
+//import {
   MagnifyingGlassIcon,
   PlusIcon,
   FireIcon,
@@ -10,12 +10,12 @@ import {
   ClockIcon,
   PinIcon
 } from '@heroicons/react/24/outline'
-import ForumCategorySidebar from './ForumCategorySidebar'
-import DiscussionCard from './DiscussionCard'
+//import ForumCategorySidebar from './ForumCategorySidebar'
+//import DiscussionCard from './DiscussionCard'
 import CreateDiscussionModal from './CreateDiscussionModal'
-import LoadingSpinner from '../../components/common/LoadingSpinner'
+//import LoadingSpinner from '../../components/common/LoadingSpinner'
 import { forumAPI } from '../../api/forum'
-import { useAuth } from '../../hooks/useAuth'
+//import { useAuth } from '../../hooks/useAuth'
 
 export default function Forum() {
   const { id: categoryId } = useParams()
